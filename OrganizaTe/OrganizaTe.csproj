@@ -196,14 +196,26 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlunosController.cs" />
+    <Compile Include="Controllers\CadeirasController.cs" />
+    <Compile Include="Controllers\CadeirasTemTurmasController.cs" />
+    <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InscricoesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TurmasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Alunos.cs" />
+    <Compile Include="Models\Cadeiras.cs" />
+    <Compile Include="Models\CadeirasTemTurmas.cs" />
+    <Compile Include="Models\Cursos.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Inscricoes.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Turmas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

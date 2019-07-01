@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -28,6 +29,22 @@ namespace OrganizaTe.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        // vamos colocar, aqui, as instruções relativas às tabelas do 'negócio'
+        // descrever os nomes das tabelas na Base de Dados
+        public virtual DbSet<Alunos> Alunos { get; set; } // tabela Alunos
+        public virtual DbSet<Cadeiras> Cadeiras { get; set; } // tabela Cadeiras
+        public virtual DbSet<CadeirasTemTurmas> CadeirasTemTurmas { get; set; } // tabela CadeirasTemTurmas
+        public virtual DbSet<Cursos> Cursos { get; set; } // tabela Cursos
+        public virtual DbSet<Inscricoes> Inscricoes { get; set; } // tabela Inscricoes
+        public virtual DbSet<Turmas> Turmas { get; set; } // tabela Turmas
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
