@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,7 +25,7 @@ namespace OrganizaTe.Models
 
 
         // FK para a tabela dos Cursos
-        [ForeignKey("Cursos")]
+        [ForeignKey("Curso")]
         public int CursosFK { get; set; }
         public virtual Cursos Curso { get; set; }
 
@@ -36,13 +34,5 @@ namespace OrganizaTe.Models
 
         // referente à turmas que essa cadeira está
         public virtual ICollection<CadeirasTemTurmas> ListaDeCadeirasTemTurmas { get; set; }
-    }
-
-    internal class CadeirasConfiguration : IEntityTypeConfiguration<Cadeiras>
-    {
-        public void Configure(EntityTypeBuilder<Cadeiras> builder)
-        {
-            builder.HasKey(t => t.ID);
-        }
     }
 }

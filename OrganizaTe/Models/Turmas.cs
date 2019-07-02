@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -38,13 +36,5 @@ namespace OrganizaTe.Models
 
         // referente às inscrições nas turmas
         public virtual ICollection<Inscricoes> ListaDeInscricoes { get; set; }
-    }
-    
-    internal class TurmasConfiguration : IEntityTypeConfiguration<Turmas>
-    {
-        public void Configure(EntityTypeBuilder<Turmas> builder)
-        {
-            builder.HasKey(t => t.ID);
-        }
     }
 }
