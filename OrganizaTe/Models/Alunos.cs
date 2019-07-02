@@ -22,10 +22,7 @@ namespace OrganizaTe.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
-        public string Email { get; set; }
-
-        [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
-        public string DataNasc { get; set; }
+        public DateTime DataNasc { get; set; }
 
         // referente às inscrições dos alunos nas cadeiras e turmas
         public virtual ICollection<Inscricoes> ListaDeInscricoes { get; set; }

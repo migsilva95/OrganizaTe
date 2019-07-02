@@ -20,7 +20,7 @@ namespace OrganizaTe.Migrations
             //*********************************************************************
             // adiciona ALUNOS
             var alunos = new List<Alunos> {
-                new Alunos {Nome="Jose Alves",Email="jalves@ipt.pt",DataNasc="02/07/2000"}
+                new Alunos {Nome="Jose Alves",DataNasc=DateTime.Parse("02-07-2000")}
             };
             alunos.ForEach(aa => context.Alunos.AddOrUpdate(a => a.Nome, aa));
             context.SaveChanges();
