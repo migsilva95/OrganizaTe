@@ -20,6 +20,8 @@ namespace OrganizaTe.Models
 
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public string Nome { get; set; }
+        
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public DateTime DataNasc { get; set; }

@@ -23,6 +23,12 @@ namespace OrganizaTe.Controllers
             return View(Cadeiras.ToList());
         }
 
+        // GET: Cadeiras/Create
+        public ActionResult Create()
+        {
+            return View(new Cadeiras());
+        }
+
         // POST: Cadeiras/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

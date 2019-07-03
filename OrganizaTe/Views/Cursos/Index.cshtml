@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OrganizaTe.Models.Cursos>
+
+@{
+    ViewBag.Title = "Cursos";
+}
+
+<h2>Cursos</h2>
+
+@if (User.IsInRole("AdminSite"))
+{
+    <p>
+        @Html.ActionLink("Criar Novo", "Create")
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                <p>
+                    @Html.ActionLink("🔍", "Details", new { id = item.ID })
+                </p>
+
+                @if (User.IsInRole("AdminSite"))
+                {
+                    <p>
+                        @Html.ActionLink("📝", "Edit", new { id = item.ID })
+                    </p>
+                    <p>
+                        @Html.ActionLink("❌", "Delete", new { id = item.ID })
+                    </p>
+                }
+                </td>
+        </tr>
+}
+
+    </table>

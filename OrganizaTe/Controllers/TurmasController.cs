@@ -22,6 +22,12 @@ namespace OrganizaTe.Controllers
             return View(turmas.ToList());
         }
 
+        // GET: Turmas/Create
+        public ActionResult Create()
+        {
+            return View(new Turmas());
+        }
+
         // POST: Turmas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

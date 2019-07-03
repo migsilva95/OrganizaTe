@@ -1,0 +1,32 @@
+﻿@model OrganizaTe.Models.Cursos
+
+@{
+    ViewBag.Title = "Apagar Curso";
+}
+
+<h2>Apagar Curso</h2>
+
+<h3>Tem a certeza que quer apagar este curso?</h3>
+<div>
+    <h4>Cursos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar Atrás", "Index")
+        </div>
+    }
+</div>

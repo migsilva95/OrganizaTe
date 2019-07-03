@@ -162,6 +162,7 @@ namespace OrganizaTe.Controllers
             {
                 try
                 {
+                    model.Alunos.Email = model.RegisterViewModel.Email;
                     db.Alunos.Add(model.Alunos);
                     db.SaveChanges();
                 }

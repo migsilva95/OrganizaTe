@@ -21,37 +21,7 @@ namespace OrganizaTe.Controllers
 
             return View(Alunos.ToList());
         }
-
-        // POST: Alunos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Alunos Alunos)
-        {
-            if (ModelState.IsValid)
-            {
-                if (db.Alunos.ToList().Any(e => e.Nome != Alunos.Nome))
-                {
-                    int idNovoAluno = 0;
-                    try
-                    {
-                        idNovoAluno = db.Alunos.Max(a => a.ID) + 1;
-                    }
-                    catch (Exception)
-                    {
-                        idNovoAluno = 1;
-                    }
-                    Alunos.ID = idNovoAluno;
-                    db.Alunos.Add(Alunos);
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Alunos", new { id = Alunos.ID });
-                }
-            }
-
-            return View(Alunos);
-        }
-
+        
         // GET: Alunos/Edit/5
         public ActionResult Edit(int id)
         {
