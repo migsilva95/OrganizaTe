@@ -28,7 +28,7 @@
             </td>
             <td>
                 <p>
-                    @Html.ActionLink("🔍", "Details", new { id = item.ID })
+                    @Html.ActionLink("🔍", "Index", "Cadeiras", new { id = item.ID }, null)
                 </p>
 
                 @if (User.IsInRole("AdminSite"))

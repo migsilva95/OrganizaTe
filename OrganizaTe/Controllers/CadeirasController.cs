@@ -12,21 +12,37 @@ namespace OrganizaTe.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Cadeiras
-        public ActionResult Index()
+        // GET: Cadeiras/1
+        public ActionResult Index(int id)
         {
-            // obtém as Cadeiras
-            var Cadeiras = db.Cadeiras
-                           .Include(c => c.Curso)
-                           .ToList();
+            if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Cursos");
+            }
 
-            return View(Cadeiras.ToList());
+            var curso = db.Cursos.Where(p => p.ID == id).FirstOrDefault();
+
+            // obtém as cadeiras de um curso
+            var cadeiras = db.Cadeiras
+                           .Include(p => p.Curso)
+                           .Where(p => p.CursosFK == id);
+            
+            return View(new CursoEListaCadeiras { Cadeiras = cadeiras.ToList(), Cursos = curso });
         }
 
         // GET: Cadeiras/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View(new Cadeiras());
+            if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(new CadeiraIdCurso
+            {
+                CursoId = id,
+                Cadeiras = new Cadeiras()
+            });
         }
 
         // POST: Cadeiras/Create
@@ -34,11 +50,11 @@ namespace OrganizaTe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Cadeiras Cadeiras)
+        public ActionResult Create(CadeiraIdCurso CadeiraIdCurso)
         {
             if (ModelState.IsValid)
             {
-                if (db.Cadeiras.ToList().Any(e => e.Nome != Cadeiras.Nome))
+                if (db.Cadeiras.ToList().Any(e => e.Nome != CadeiraIdCurso.Cadeiras.Nome))
                 {
                     int idNovaCadeira = 0;
                     try
@@ -49,14 +65,15 @@ namespace OrganizaTe.Controllers
                     {
                         idNovaCadeira = 1;
                     }
-                    Cadeiras.ID = idNovaCadeira;
-                    db.Cadeiras.Add(Cadeiras);
+                    CadeiraIdCurso.Cadeiras.ID = idNovaCadeira;
+                    CadeiraIdCurso.Cadeiras.CursosFK = CadeiraIdCurso.CursoId;
+                    db.Cadeiras.Add(CadeiraIdCurso.Cadeiras);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Cadeiras", new { id = Cadeiras.ID });
+                    return RedirectToAction("Index", "Cadeiras", new { id = CadeiraIdCurso.Cadeiras.CursosFK });
                 }
             }
 
-            return View(Cadeiras);
+            return View(CadeiraIdCurso);
         }
 
         // GET: Cadeiras/Edit/5
@@ -84,7 +101,7 @@ namespace OrganizaTe.Controllers
             {
                 db.Entry(Cadeiras).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = Cadeiras.CursosFK });
             }
             return View(Cadeiras);
         }
@@ -111,9 +128,10 @@ namespace OrganizaTe.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Cadeiras Cadeiras = db.Cadeiras.Find(id);
+            int cursoid = Cadeiras.CursosFK;
             db.Cadeiras.Remove(Cadeiras);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = cursoid });
         }
 
         protected override void Dispose(bool disposing)

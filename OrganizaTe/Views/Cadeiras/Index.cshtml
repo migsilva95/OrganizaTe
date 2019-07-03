@@ -1,0 +1,42 @@
+﻿@model OrganizaTe.Models.CursoEListaCadeiras
+
+@{
+    ViewBag.Title = "Cadeiras do curso de " + Model.Cursos.Nome;
+}
+
+<h2>Cadeiras do curso de @Model.Cursos.Nome</h2>
+
+@if (User.IsInRole("AdminSite"))
+{
+    <p>
+        @Html.ActionLink("Criar Novo", "Create", new { id = Model.Cursos.ID })
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Cadeiras)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @if (User.IsInRole("AdminSite"))
+                {
+                    <p>@Html.ActionLink("📝", "Edit", new { id = item.ID })</p>
+                    <p>@Html.ActionLink("❌", "Delete", new { id = item.ID })</p>
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.ActionLink("Voltar atrás", "Index", "Cursos")
+</div>

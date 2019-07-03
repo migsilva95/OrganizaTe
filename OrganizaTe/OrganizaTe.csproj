@@ -209,7 +209,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AlunosRegister.cs" />
+    <Compile Include="Models\SomeModels.cs" />
     <Compile Include="Models\Alunos.cs" />
     <Compile Include="Models\Cadeiras.cs" />
     <Compile Include="Models\CadeirasTemTurmas.cs" />
@@ -277,6 +277,10 @@
     <Content Include="Views\Cursos\Create.cshtml" />
     <Content Include="Views\Cursos\Edit.cshtml" />
     <Content Include="Views\Cursos\Delete.cshtml" />
+    <Content Include="Views\Cadeiras\Index.cshtml" />
+    <Content Include="Views\Cadeiras\Create.cshtml" />
+    <Content Include="Views\Cadeiras\Edit.cshtml" />
+    <Content Include="Views\Cadeiras\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
