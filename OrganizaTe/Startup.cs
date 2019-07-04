@@ -70,7 +70,7 @@ namespace OrganizaTe
 
             try
             {
-                // criar um utilizador 'Aluno'
+                // criar um utilizador 'AdminSite'
                 var user = new ApplicationUser();
                 user.UserName = "miguelsilva@ipt.pt";
                 user.Email = "miguelsilva@ipt.pt";
@@ -78,13 +78,19 @@ namespace OrganizaTe
                 string userPWD = "123_Asd";
                 var chkUser = userManager.Create(user, userPWD);
 
+                //Adicionar o Utilizador à respetiva Role-AdminSite-
+                if (chkUser.Succeeded)
+                {
+                    var result1 = userManager.AddToRole(user.Id, "AdminSite");
+                }
 
-                var user = new ApplicationUser();
+
+                user = new ApplicationUser();
                 user.UserName = "pedrovinha@ipt.pt";
                 user.Email = "pedrovinha@ipt.pt";
 
-                string userPWD = "123_Asd";
-                var chkUser = userManager.Create(user, userPWD);
+                userPWD = "123_Asd";
+                chkUser = userManager.Create(user, userPWD);
 
                 //Adicionar o Utilizador à respetiva Role-AdminSite-
                 if (chkUser.Succeeded)

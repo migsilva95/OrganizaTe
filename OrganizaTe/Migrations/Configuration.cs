@@ -20,7 +20,12 @@ namespace OrganizaTe.Migrations
             //*********************************************************************
             // adiciona ALUNOS
             var alunos = new List<Alunos> {
-                new Alunos {Nome="Jose Alves",DataNasc=DateTime.Parse("02-07-2000")}
+                new Alunos {Nome="Jose Alves",DataNasc=DateTime.Parse("02-07-1998")},
+                new Alunos {Nome="Tania Vieira",DataNasc=DateTime.Parse("02-07-2000")},
+                new Alunos {Nome="Antonio Rocha",DataNasc=DateTime.Parse("02-07-1999")},
+                new Alunos {Nome="Andre Silveira",DataNasc=DateTime.Parse("02-07-1999")},
+                new Alunos {Nome="Lurdes Vieira",DataNasc=DateTime.Parse("02-07-1999")},
+                new Alunos {Nome="Claudia Pinto",DataNasc=DateTime.Parse("02-07-1998")}
             };
             alunos.ForEach(aa => context.Alunos.AddOrUpdate(a => a.Nome, aa));
             context.SaveChanges();
@@ -28,24 +33,86 @@ namespace OrganizaTe.Migrations
             //*********************************************************************
             // adiciona CURSOS
             var cursos = new List<Cursos> {
-                new Cursos {Nome ="Licenciatura de Engenharia Informática"}
-                };
+                new Cursos {Nome="Licenciatura de Engenharia Informatica"},
+                new Cursos {Nome="Licenciatura de Engenharia Electrotécnica e Computadores"},
+                new Cursos {Nome="Licenciatura de Fotografia"}
+            };
+                
             cursos.ForEach(cc => context.Cursos.AddOrUpdate(c => c.Nome, cc));
             context.SaveChanges();
 
             //*********************************************************************
             // adiciona CADEIRAS
             var cadeiras = new List<Cadeiras> {
-                new Cadeiras {Nome="Tecnologias de Internet 1",CursosFK=1},
-                new Cadeiras {Nome="Tecnologias de Internet 2",CursosFK=1}
+                //-------------1º Ano 1º Semestre------------------
+                new Cadeiras {Nome="Algebra",CursosFK=1},
+                new Cadeiras {Nome="Análise I",CursosFK=1},
+                new Cadeiras {Nome="Sistemas Digitais",CursosFK=1},
+                new Cadeiras {Nome="Introdução à Tecnologia",CursosFK=1},
+                new Cadeiras {Nome="Introdução à Programação",CursosFK=1},
+                //-------------1º Ano 2º Semestre------------------
+                new Cadeiras {Nome="Análise II",CursosFK=1},
+                new Cadeiras {Nome="Introdução à Electrónica Digital",CursosFK=1},
+                new Cadeiras {Nome="Programação Orientada a Objetos",CursosFK=1},
+                new Cadeiras {Nome="Logica e Computação",CursosFK=1},
+                new Cadeiras {Nome="Tecnologia da Internet I",CursosFK=1},
+                //-------------2º Ano 1º Semestre------------------
+                new Cadeiras {Nome="Arquitectura de Computadores I",CursosFK=1},
+                new Cadeiras {Nome="Base de Dados I",CursosFK=1},
+                new Cadeiras {Nome="Estruturas de Dados e Algoritmos",CursosFK=1},
+                new Cadeiras {Nome="Introdução às Telecomunicações",CursosFK=1},
+                new Cadeiras {Nome="Probabilida e Estatistica",CursosFK=1},
+                //-------------2º Ano 2º Semestre------------------
+                new Cadeiras {Nome="Sistemas Operativos",CursosFK=1},
+                new Cadeiras {Nome="Tecnologia da Internet II",CursosFK=1},
+                new Cadeiras {Nome="Base de Dados II",CursosFK=1},
+                new Cadeiras {Nome="Microprocessadores",CursosFK=1},
+                new Cadeiras {Nome="Redes de Dados I",CursosFK=1},
+                //-------------3º Ano 1º Semestre------------------
+                new Cadeiras {Nome="Analise de Sistemas",CursosFK=1},
+                new Cadeiras {Nome="Arquitectura de Computadores II",CursosFK=1},
+                new Cadeiras {Nome="Gestão e Segurança de Redes Informáticas",CursosFK=1},
+                new Cadeiras {Nome="Redes de Dados II",CursosFK=1},
+                new Cadeiras {Nome="Sistemas Distribuídos",CursosFK=1},
+                //-------------3º Ano 2º Semestre------------------
+                new Cadeiras {Nome="Empreendorismo",CursosFK=1},
+                new Cadeiras {Nome="Projeto de Redes",CursosFK=1},
+                new Cadeiras {Nome="Projecto de Sistemas de Informação",CursosFK=1},
+                new Cadeiras {Nome="Projeto Final",CursosFK=1},
+                new Cadeiras {Nome="Sistemas de Informação nas Organizações",CursosFK=1}
             };
             cadeiras.ForEach(cc => context.Cadeiras.AddOrUpdate(c => new { c.Nome, c.CursosFK }, cc));
             context.SaveChanges();
 
             //*********************************************************************
             // adiciona TURMAS
-            var turmas = new List<Turmas> {
-                new Turmas {Ano="1",Turma="A",Semestre="2",Horario="../Home/1A2.jpg"}  // NOT DECIDE YET
+            var turmas = new List<Turmas> {// NOT DECIDE YET
+                //---------------------------- 1º Semestre -----------------------------
+                //------------------------------- 1º Ano -------------------------------
+                new Turmas {Ano="1", Turma="A", Horario="../Home/1A1.jpg", Semestre="1"},
+                new Turmas {Ano="1", Turma="B", Horario="../Home/1B1.jpg", Semestre="1"},
+                new Turmas {Ano="1", Turma="C", Horario="../Home/1C1.jpg", Semestre="1"},
+                //------------------------------- 2º Ano -------------------------------
+                new Turmas {Ano="2", Turma="A", Horario="../Home/1A1.jpg", Semestre="1"},
+                new Turmas {Ano="2", Turma="B", Horario="../Home/1B1.jpg", Semestre="1"},
+                new Turmas {Ano="2", Turma="C", Horario="../Home/1C1.jpg", Semestre="1"},
+                //------------------------------- 3º Ano -------------------------------
+                new Turmas {Ano="3", Turma="A", Horario="../Home/1A1.jpg", Semestre="1"},
+                new Turmas {Ano="3", Turma="B", Horario="../Home/1B1.jpg", Semestre="1"},
+                new Turmas {Ano="3", Turma="C", Horario="../Home/1C1.jpg", Semestre="1"},
+                //---------------------------- 2º Semestre -----------------------------
+                //------------------------------- 1º Ano -------------------------------
+                new Turmas {Ano="1", Turma="A", Horario="../Home/1A2.jpg", Semestre="2"},
+                new Turmas {Ano="1", Turma="B", Horario="../Home/1B2.jpg", Semestre="2"},
+                new Turmas {Ano="1", Turma="C", Horario="../Home/1C2.jpg", Semestre="2"},
+                //------------------------------- 2º Ano -------------------------------
+                new Turmas {Ano="2", Turma="A", Horario="../Home/1A2.jpg", Semestre="2"},
+                new Turmas {Ano="2", Turma="B", Horario="../Home/1B2.jpg", Semestre="2"},
+                new Turmas {Ano="2", Turma="C", Horario="../Home/1C2.jpg", Semestre="2"},
+                //------------------------------- 3º Ano -------------------------------
+                new Turmas {Ano="3", Turma="A", Horario="../Home/1A2.jpg", Semestre="2"},
+                new Turmas {Ano="3", Turma="B", Horario="../Home/1B2.jpg", Semestre="2"},
+                new Turmas {Ano="3", Turma="C", Horario="../Home/1C2.jpg", Semestre="2"}                
             };
             turmas.ForEach(tt => context.Turmas.AddOrUpdate(t => new { t.Ano, t.Turma, t.Semestre }, tt));
             context.SaveChanges();
