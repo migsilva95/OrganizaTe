@@ -17,7 +17,7 @@ namespace OrganizaTe.Controllers
         {
             if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
             {
-                return RedirectToAction("Index", "Cursos");
+                return RedirectToAction("Index", "Home");
             }
 
             var curso = db.Cursos.Where(p => p.ID == id).FirstOrDefault();

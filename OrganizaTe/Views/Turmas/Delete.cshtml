@@ -1,0 +1,56 @@
+﻿@model OrganizaTe.Models.Turmas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Tem a certeza que quer apagar esta turma?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Horario)
+        </dt>
+
+        <dd>
+            <img src="~/Images/@(Model.Horario)" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Voltar Atrás", "Index", new { id = Model.CursosFK })
+    </div>
+            
+    }
+</div>

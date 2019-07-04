@@ -31,6 +31,11 @@ namespace OrganizaTe.Models
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public string Semestre { get; set; }
 
+        // FK para a tabela dos Cursos
+        [ForeignKey("Curso")]
+        public int CursosFK { get; set; }
+        public virtual Cursos Curso { get; set; }
+
         // referente às cadeiras da turma
         public virtual ICollection<CadeirasTemTurmas> ListaDeCadeirasTemTurmas { get; set; }
 

@@ -281,6 +281,11 @@
     <Content Include="Views\Cadeiras\Create.cshtml" />
     <Content Include="Views\Cadeiras\Edit.cshtml" />
     <Content Include="Views\Cadeiras\Delete.cshtml" />
+    <Content Include="Views\Turmas\Index.cshtml" />
+    <Content Include="Views\Turmas\Create.cshtml" />
+    <Content Include="Views\Turmas\Edit.cshtml" />
+    <Content Include="Views\Turmas\Delete.cshtml" />
+    <Content Include="Views\Turmas\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

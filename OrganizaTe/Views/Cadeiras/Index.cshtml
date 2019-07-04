@@ -5,11 +5,11 @@
 }
 
 <h2>Cadeiras do curso de @Model.Cursos.Nome</h2>
-
+<br />
 @if (User.IsInRole("AdminSite"))
 {
     <p>
-        @Html.ActionLink("Criar Novo", "Create", new { id = Model.Cursos.ID })
+        @Html.ActionLink("Criar Nova", "Create", new { id = Model.Cursos.ID })
     </p>
 }
 <table class="table">

@@ -1,0 +1,63 @@
+﻿@model OrganizaTe.Models.CursoEListaTurmas
+
+@{
+    ViewBag.Title = "Turmas do Curso de " + Model.Cursos.Nome;
+}
+
+<h2>Turmas do curso de @Model.Cursos.Nome</h2>
+<br />
+@if (User.IsInRole("AdminSite"))
+{
+    <p>
+        @Html.ActionLink("Criar Nova", "Create")
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            Ano
+        </th>
+        <th>
+            Turma
+        </th>
+        <th>
+            Semestre
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Turmas)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ano)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Turma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Semestre)
+            </td>
+            <td>
+                <p>
+                    @Html.ActionLink("🔍", "Details", new { id = item.ID }) 
+                </p>
+
+                @if (User.IsInRole("AdminSite"))
+                {
+                    <p>
+                        @Html.ActionLink("📝", "Edit", new { id = item.ID })
+                    </p>
+                    <p>
+                        @Html.ActionLink("❌", "Delete", new { id = item.ID })
+                    </p>
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Voltar atrás", "Index", "Cursos")
+</div>

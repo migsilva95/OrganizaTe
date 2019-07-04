@@ -5,7 +5,7 @@
 }
 
 <h2>Cursos</h2>
-
+<br />
 @if (User.IsInRole("AdminSite"))
 {
     <p>
@@ -28,7 +28,11 @@
             </td>
             <td>
                 <p>
-                    @Html.ActionLink("🔍", "Index", "Cadeiras", new { id = item.ID }, null)
+                    @Html.ActionLink("🔍", "Index", "Cadeiras", new { id = item.ID }, null) Cadeiras
+                </p>
+
+                <p>
+                    @Html.ActionLink("🔍", "Index", "Turmas", new { id = item.ID }, null) Turmas
                 </p>
 
                 @if (User.IsInRole("AdminSite"))
@@ -40,8 +44,8 @@
                         @Html.ActionLink("❌", "Delete", new { id = item.ID })
                     </p>
                 }
-                </td>
+            </td>
         </tr>
-}
+    }
 
-    </table>
+</table>

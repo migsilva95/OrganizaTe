@@ -22,4 +22,10 @@ namespace OrganizaTe.Models
         public int CursoId { get; set; }
         public Cadeiras Cadeiras { get; set; }
     }
+
+    public class CursoEListaTurmas
+    {
+        public Cursos Cursos { get; set; }
+        public List<Turmas> Turmas { get; set; }
+    }
 }

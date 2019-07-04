@@ -1,0 +1,51 @@
+﻿@model OrganizaTe.Models.Turmas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Turmas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Horario)
+        </dt>
+
+        <dd>
+            <a href="~/Images/@(Model.Horario)" target="_blank">
+                <img src="~/Images/@(Model.Horario)" />
+            </a>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Voltar Atrás", "Index", new { id = Model.CursosFK })
+</p>

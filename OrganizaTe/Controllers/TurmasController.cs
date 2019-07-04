@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace OrganizaTe.Controllers
@@ -12,14 +14,38 @@ namespace OrganizaTe.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Turmas
-        public ActionResult Index()
+        // GET: Turmas/1
+        public ActionResult Index(int id)
         {
-            // obtém as turmas
-            var turmas = db.Turmas
-                           .ToList();
+            if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
-            return View(turmas.ToList());
+            var curso = db.Cursos.Where(p => p.ID == id).FirstOrDefault();
+
+            // obtém as turmas de uma cadeira
+            var turmas = db.Turmas
+                           .Include(p => p.Curso)
+                           .Where(p => p.CursosFK == id);
+
+            return View(new CursoEListaTurmas { Turmas = turmas.ToList(), Cursos = curso });
+        }
+
+        // GET: Turmas/Details/5
+        public ActionResult Details(int id)
+        {
+            if (db.Turmas.Where(p => p.ID == id).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Turmas");
+            }
+
+            Turmas turmas = db.Turmas.Find(id);
+            if (turmas == null)
+            {
+                return HttpNotFound();
+            }
+            return View(turmas);
         }
 
         // GET: Turmas/Create
@@ -77,10 +103,29 @@ namespace OrganizaTe.Controllers
         // POST: Turmas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Ano,Turma,Horario,Semestre")] Turmas Turmas)
+        public ActionResult Edit(Turmas Turmas, HttpPostedFileBase uploadHorario)
         {
             if (ModelState.IsValid)
             {
+                // validar se o horario foi fornecido
+                if (uploadHorario != null)
+                {
+                    string pathImagens = "";
+                    string pasta = "";
+                    string nomeImagem = Turmas.Ano + Turmas.Turma + Turmas.Semestre + Path.GetExtension(uploadHorario.FileName);
+                    
+                    // criar o caminho completo até ao sítio onde o ficheiro
+                    // será guardado
+                    pathImagens = Path.Combine(Server.MapPath("~/Imagens/"), nomeImagem);
+
+                    pasta = Path.GetDirectoryName(pathImagens);
+
+                    Directory.CreateDirectory(pasta);
+
+                    // guardar o nome do ficheiro na BD
+                    Turmas.Horario = nomeImagem;
+                    uploadHorario.SaveAs(pathImagens);
+                }
                 db.Entry(Turmas).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

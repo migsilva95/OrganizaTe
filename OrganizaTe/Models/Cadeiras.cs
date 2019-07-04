@@ -22,8 +22,7 @@ namespace OrganizaTe.Models
 
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public string Nome { get; set; }
-
-
+        
         // FK para a tabela dos Cursos
         [ForeignKey("Curso")]
         public int CursosFK { get; set; }
