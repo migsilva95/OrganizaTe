@@ -93,26 +93,26 @@ namespace OrganizaTe.Migrations
                 new Turmas {Ano="1", Turma="B", Horario="../Home/1B1.jpg", Semestre="1"},
                 new Turmas {Ano="1", Turma="C", Horario="../Home/1C1.jpg", Semestre="1"},
                 //------------------------------- 2º Ano -------------------------------
-                new Turmas {Ano="2", Turma="A", Horario="../Home/1A1.jpg", Semestre="1"},
-                new Turmas {Ano="2", Turma="B", Horario="../Home/1B1.jpg", Semestre="1"},
-                new Turmas {Ano="2", Turma="C", Horario="../Home/1C1.jpg", Semestre="1"},
+                new Turmas {Ano="2", Turma="A", Horario="../Home/2A1.jpg", Semestre="1"},
+                new Turmas {Ano="2", Turma="B", Horario="../Home/2B1.jpg", Semestre="1"},
+                new Turmas {Ano="2", Turma="C", Horario="../Home/2C1.jpg", Semestre="1"},
                 //------------------------------- 3º Ano -------------------------------
-                new Turmas {Ano="3", Turma="A", Horario="../Home/1A1.jpg", Semestre="1"},
-                new Turmas {Ano="3", Turma="B", Horario="../Home/1B1.jpg", Semestre="1"},
-                new Turmas {Ano="3", Turma="C", Horario="../Home/1C1.jpg", Semestre="1"},
+                new Turmas {Ano="3", Turma="A", Horario="../Home/3A1.jpg", Semestre="1"},
+                new Turmas {Ano="3", Turma="B", Horario="../Home/3B1.jpg", Semestre="1"},
+                new Turmas {Ano="3", Turma="C", Horario="../Home/3C1.jpg", Semestre="1"},
                 //---------------------------- 2º Semestre -----------------------------
                 //------------------------------- 1º Ano -------------------------------
                 new Turmas {Ano="1", Turma="A", Horario="../Home/1A2.jpg", Semestre="2"},
                 new Turmas {Ano="1", Turma="B", Horario="../Home/1B2.jpg", Semestre="2"},
                 new Turmas {Ano="1", Turma="C", Horario="../Home/1C2.jpg", Semestre="2"},
                 //------------------------------- 2º Ano -------------------------------
-                new Turmas {Ano="2", Turma="A", Horario="../Home/1A2.jpg", Semestre="2"},
-                new Turmas {Ano="2", Turma="B", Horario="../Home/1B2.jpg", Semestre="2"},
-                new Turmas {Ano="2", Turma="C", Horario="../Home/1C2.jpg", Semestre="2"},
+                new Turmas {Ano="2", Turma="A", Horario="../Home/2A2.jpg", Semestre="2"},
+                new Turmas {Ano="2", Turma="B", Horario="../Home/2B2.jpg", Semestre="2"},
+                new Turmas {Ano="2", Turma="C", Horario="../Home/2C2.jpg", Semestre="2"},
                 //------------------------------- 3º Ano -------------------------------
-                new Turmas {Ano="3", Turma="A", Horario="../Home/1A2.jpg", Semestre="2"},
-                new Turmas {Ano="3", Turma="B", Horario="../Home/1B2.jpg", Semestre="2"},
-                new Turmas {Ano="3", Turma="C", Horario="../Home/1C2.jpg", Semestre="2"}                
+                new Turmas {Ano="3", Turma="A", Horario="../Home/3A2.jpg", Semestre="2"},
+                new Turmas {Ano="3", Turma="B", Horario="../Home/3B2.jpg", Semestre="2"},
+                new Turmas {Ano="3", Turma="C", Horario="../Home/3C2.jpg", Semestre="2"}                
             };
             turmas.ForEach(tt => context.Turmas.AddOrUpdate(t => new { t.Ano, t.Turma, t.Semestre }, tt));
             context.SaveChanges();
