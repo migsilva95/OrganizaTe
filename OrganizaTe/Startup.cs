@@ -78,6 +78,14 @@ namespace OrganizaTe
                 string userPWD = "123_Asd";
                 var chkUser = userManager.Create(user, userPWD);
 
+
+                var user = new ApplicationUser();
+                user.UserName = "pedrovinha@ipt.pt";
+                user.Email = "pedrovinha@ipt.pt";
+
+                string userPWD = "123_Asd";
+                var chkUser = userManager.Create(user, userPWD);
+
                 //Adicionar o Utilizador à respetiva Role-AdminSite-
                 if (chkUser.Succeeded)
                 {
