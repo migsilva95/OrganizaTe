@@ -49,9 +49,18 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Turmas/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View(new Turmas());
+            if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(new TurmaIdCurso
+            {
+                CursoId = id,
+                Turmas = new Turmas()
+            });
         }
 
         // POST: Turmas/Create
@@ -59,12 +68,32 @@ namespace OrganizaTe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Turmas Turmas)
+        public ActionResult Create(TurmaIdCurso TurmaIdCurso, HttpPostedFileBase uploadHorario)
         {
             if (ModelState.IsValid)
             {
-                if (db.Cursos.ToList().Any(e => e.ID != Turmas.ID))
+                if (db.Turmas.ToList().Any(e => e.ID != TurmaIdCurso.Turmas.ID))
                 {
+                    // validar se o horario foi fornecido
+                    if (uploadHorario != null)
+                    {
+                        Cursos curso = db.Cursos.Where(p => p.ID == TurmaIdCurso.CursoId).FirstOrDefault();
+                        string pathImagens = "";
+                        string pasta = "";
+                        string nomeImagem = curso.Nome + "_" + TurmaIdCurso.Turmas.Ano + TurmaIdCurso.Turmas.Turma + TurmaIdCurso.Turmas.Semestre + Path.GetExtension(uploadHorario.FileName);
+
+                        // criar o caminho completo até ao sítio onde o ficheiro
+                        // será guardado
+                        pathImagens = Path.Combine(Server.MapPath("~/Images/"), nomeImagem);
+
+                        pasta = Path.GetDirectoryName(pathImagens);
+
+                        Directory.CreateDirectory(pasta);
+
+                        // guardar o nome do ficheiro na BD
+                        TurmaIdCurso.Turmas.Horario = nomeImagem;
+                        uploadHorario.SaveAs(pathImagens);
+                    }
                     int idNovaTurma = 0;
                     try
                     {
@@ -74,14 +103,15 @@ namespace OrganizaTe.Controllers
                     {
                         idNovaTurma = 1;
                     }
-                    Turmas.ID = idNovaTurma;
-                    db.Turmas.Add(Turmas);
+                    TurmaIdCurso.Turmas.ID = idNovaTurma;
+                    TurmaIdCurso.Turmas.CursosFK = TurmaIdCurso.CursoId;
+                    db.Turmas.Add(TurmaIdCurso.Turmas);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Turmas", new { id = Turmas.ID });
+                    return RedirectToAction("Index", "Turmas", new { id = TurmaIdCurso.CursoId });
                 }
             }
 
-            return View(Turmas);
+            return View(TurmaIdCurso.Turmas);
         }
 
         // GET: Turmas/Edit/5
@@ -110,13 +140,14 @@ namespace OrganizaTe.Controllers
                 // validar se o horario foi fornecido
                 if (uploadHorario != null)
                 {
+                    Cursos curso = db.Cursos.Where(p => p.ID == Turmas.CursosFK).FirstOrDefault();
                     string pathImagens = "";
                     string pasta = "";
-                    string nomeImagem = Turmas.Ano + Turmas.Turma + Turmas.Semestre + Path.GetExtension(uploadHorario.FileName);
+                    string nomeImagem = curso.Nome + "_" + Turmas.Ano + Turmas.Turma + Turmas.Semestre + Path.GetExtension(uploadHorario.FileName);
                     
                     // criar o caminho completo até ao sítio onde o ficheiro
                     // será guardado
-                    pathImagens = Path.Combine(Server.MapPath("~/Imagens/"), nomeImagem);
+                    pathImagens = Path.Combine(Server.MapPath("~/Images/"), nomeImagem);
 
                     pasta = Path.GetDirectoryName(pathImagens);
 
@@ -128,7 +159,7 @@ namespace OrganizaTe.Controllers
                 }
                 db.Entry(Turmas).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = Turmas.CursosFK });
             }
             return View(Turmas);
         }
@@ -155,9 +186,15 @@ namespace OrganizaTe.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Turmas Turmas = db.Turmas.Find(id);
+            int cursoid = Turmas.CursosFK;
+            var filePath = Server.MapPath("~/Images/" + Turmas.Horario);
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
             db.Turmas.Remove(Turmas);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = cursoid });
         }
 
         protected override void Dispose(bool disposing)

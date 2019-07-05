@@ -9,7 +9,7 @@
 @if (User.IsInRole("AdminSite"))
 {
     <p>
-        @Html.ActionLink("Criar Nova", "Create")
+        @Html.ActionLink("Criar Nova", "Create", new { id = Model.Cursos.ID })
     </p>
 }
 <table class="table">

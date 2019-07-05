@@ -24,8 +24,7 @@ namespace OrganizaTe.Models
 
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public string Turma { get; set; }
-
-        [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
+        
         public string Horario { get; set; }
 
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]

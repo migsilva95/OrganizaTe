@@ -198,7 +198,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlunosController.cs" />
     <Compile Include="Controllers\CadeirasController.cs" />
-    <Compile Include="Controllers\CadeirasTemTurmasController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InscricoesController.cs" />
