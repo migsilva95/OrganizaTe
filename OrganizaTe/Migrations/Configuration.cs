@@ -89,29 +89,29 @@ namespace OrganizaTe.Migrations
             var turmas = new List<Turmas> {
                 //---------------------------- 1º Semestre -----------------------------
                 //------------------------------- 1º Ano -------------------------------
-                new Turmas {Ano="1", Turma="A", Horario="1A1.jpg", Semestre="1", CursosFK=1},
-                new Turmas {Ano="1", Turma="B", Horario="1B1.jpg", Semestre="1", CursosFK=1},
-                new Turmas {Ano="1", Turma="C", Horario="1C1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="1", Turma="A", Horario="LEI_1A1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="1", Turma="B", Horario="LEI_1B1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="1", Turma="C", Horario="LEI_1C1.jpg", Semestre="1", CursosFK=1},
                 //------------------------------- 2º Ano -------------------------------
-                new Turmas {Ano="2", Turma="A", Horario="2A1.jpg", Semestre="1", CursosFK=1},
-                new Turmas {Ano="2", Turma="B", Horario="2B1.jpg", Semestre="1", CursosFK=1},
-                new Turmas {Ano="2", Turma="C", Horario="2C1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="2", Turma="A", Horario="LEI_2A1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="2", Turma="B", Horario="LEI_2B1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="2", Turma="C", Horario="LEI_2C1.jpg", Semestre="1", CursosFK=1},
                 //------------------------------- 3º Ano -------------------------------
-                new Turmas {Ano="3", Turma="A", Horario="3A1.jpg", Semestre="1", CursosFK=1},
-                new Turmas {Ano="3", Turma="B", Horario="3B1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="3", Turma="A", Horario="LEI_3A1.jpg", Semestre="1", CursosFK=1},
+                new Turmas {Ano="3", Turma="B", Horario="LEI_3B1.jpg", Semestre="1", CursosFK=1},
                 //---------------------------- 2º Semestre -----------------------------
                 //------------------------------- 1º Ano -------------------------------
-                new Turmas {Ano="1", Turma="A", Horario="1A2.jpg", Semestre="2", CursosFK=1},
-                new Turmas {Ano="1", Turma="B", Horario="1B2.jpg", Semestre="2", CursosFK=1},
-                new Turmas {Ano="1", Turma="C", Horario="1C2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="1", Turma="A", Horario="LEI_1A2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="1", Turma="B", Horario="LEI_1B2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="1", Turma="C", Horario="LEI_1C2.jpg", Semestre="2", CursosFK=1},
                 //------------------------------- 2º Ano -------------------------------
-                new Turmas {Ano="2", Turma="A", Horario="2A2.jpg", Semestre="2", CursosFK=1},
-                new Turmas {Ano="2", Turma="B", Horario="2B2.jpg", Semestre="2", CursosFK=1},
-                new Turmas {Ano="2", Turma="C", Horario="2C2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="2", Turma="A", Horario="LEI_2A2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="2", Turma="B", Horario="LEI_2B2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="2", Turma="C", Horario="LEI_2C2.jpg", Semestre="2", CursosFK=1},
                 //------------------------------- 3º Ano -------------------------------
-                new Turmas {Ano="3", Turma="A", Horario="3A2.jpg", Semestre="2", CursosFK=1},
-                new Turmas {Ano="3", Turma="B", Horario="3B2.jpg", Semestre="2", CursosFK=1},
-                new Turmas {Ano="3", Turma="C", Horario="3C2.jpg", Semestre="2", CursosFK=1}                
+                new Turmas {Ano="3", Turma="A", Horario="LEI_3A2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="3", Turma="B", Horario="LEI_3B2.jpg", Semestre="2", CursosFK=1},
+                new Turmas {Ano="3", Turma="C", Horario="LEI_3C2.jpg", Semestre="2", CursosFK=1}                
             };
             turmas.ForEach(tt => context.Turmas.AddOrUpdate(t => new { t.Ano, t.Turma, t.Semestre }, tt));
             context.SaveChanges();

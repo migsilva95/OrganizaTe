@@ -1,0 +1,84 @@
+﻿@model OrganizaTe.Models.CadeirasDaTurma
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Turma </h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Turma.Ano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turma.Ano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turma.Turma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turma.Turma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turma.Semestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Turma.Semestre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Turma.Horario)
+        </dt>
+
+        <dd>
+            <a href="~/Images/@(Model.Turma.Horario)" target="_blank">
+                <img src="~/Images/@(Model.Turma.Horario)" />
+            </a>
+        </dd>
+
+    </dl>
+</div>
+<br />
+@if (User.IsInRole("AdminSite"))
+{
+    <p>
+
+        @Html.ActionLink("Adicionar nova Cadeira", "Create", new { id = Model.Turma.ID })
+    </p>
+}
+
+<h4>Cadeiras</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Cadeiras)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @if (User.IsInRole("AdminSite"))
+                {
+                    <p>
+                        @Html.ActionLink("❌", "Delete", new { id = item.ID })
+                    </p>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

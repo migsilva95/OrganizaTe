@@ -34,4 +34,16 @@ namespace OrganizaTe.Models
         public int CursoId { get; set; }
         public Turmas Turmas { get; set; }
     }
+
+    public class CadeirasDaTurma
+    {
+        public Turmas Turma { get; set; }
+        public List<Cadeiras> Cadeiras { get; set; }
+    }
+
+    public class CadeirasToDropDown
+    {
+        public CadeirasTemTurmas CadeirasTemTurmas { get; set; }
+        public List<Cadeiras> Cadeiras { get; set; }
+    }
 }
