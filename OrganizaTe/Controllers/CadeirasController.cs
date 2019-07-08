@@ -122,13 +122,26 @@ namespace OrganizaTe.Controllers
             return View(Cadeiras);
         }
 
-        // POST: Cadeiras/Delete/5
+        //POST: Cadeiras/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Cadeiras Cadeiras = db.Cadeiras.Find(id);
             int cursoid = Cadeiras.CursosFK;
+            foreach (var CadeirasTemTurmas in Cadeiras.ListaDeCadeirasTemTurmas.ToList())
+            {
+                
+                foreach (var cadeirastemturmas in Cadeiras.ListaDeCadeirasTemTurmas.ToList())
+                {
+                    db.CadeirasTemTurmas.Remove(cadeirastemturmas);
+                }
+                foreach (var inscricoes in Cadeiras.ListaDeInscricoes.ToList())
+                {
+                    db.Inscricoes.Remove(inscricoes);
+                }
+               
+            }
             db.Cadeiras.Remove(Cadeiras);
             db.SaveChanges();
             return RedirectToAction("Index", new { id = cursoid });

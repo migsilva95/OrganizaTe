@@ -12,6 +12,7 @@ namespace OrganizaTe.Models
         public Cursos()
         {
             ListaDeCadeiras = new HashSet<Cadeiras>();
+            ListaDeTurmas = new HashSet<Turmas>();
         }
 
         [Key]
@@ -23,5 +24,8 @@ namespace OrganizaTe.Models
 
         // referente à quantidade de cadeiras no curso
         public virtual ICollection<Cadeiras> ListaDeCadeiras { get; set; }
+
+        // referente à quantidade de turmas no curso
+        public virtual ICollection<Turmas> ListaDeTurmas { get; set; }
     }
 }

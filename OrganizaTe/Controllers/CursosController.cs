@@ -103,18 +103,47 @@ namespace OrganizaTe.Controllers
             }
             return View(Cursos);
         }
-
-        // POST: Cursos/Delete/5
+        //POST: Cursos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Cursos Cursos = db.Cursos.Find(id);
+            foreach (var turmas in Cursos.ListaDeTurmas.ToList())
+            {
+                var filePath = Server.MapPath("~/Images/" + turmas.Horario);
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+                foreach(var cadeirastemturmas in turmas.ListaDeCadeirasTemTurmas.ToList())
+                {
+                    db.CadeirasTemTurmas.Remove(cadeirastemturmas);
+                }
+                foreach (var inscricoes in turmas.ListaDeInscricoes.ToList())
+                {
+                    db.Inscricoes.Remove(inscricoes);
+                }
+                db.Turmas.Remove(turmas);
+            }
+
+            foreach (var Cadeiras in Cursos.ListaDeCadeiras.ToList())
+            {
+                foreach (var cadeirastemturmas in Cadeiras.ListaDeCadeirasTemTurmas.ToList())
+                {
+                    db.CadeirasTemTurmas.Remove(cadeirastemturmas);
+                }
+                foreach (var inscricoes in Cadeiras.ListaDeInscricoes.ToList())
+                {
+                    db.Inscricoes.Remove(inscricoes);
+                }
+
+                db.Cadeiras.Remove(Cadeiras);
+            }
             db.Cursos.Remove(Cursos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
