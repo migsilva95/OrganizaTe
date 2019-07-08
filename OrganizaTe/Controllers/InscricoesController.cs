@@ -14,7 +14,19 @@ namespace OrganizaTe.Controllers
         // GET: Cursos/Create
         public ActionResult Create()
         {
-            return View(new Inscricoes());
+            Alunos Alunos = db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault();
+
+            ViewBag.Cadeiras = db.Cadeiras.ToList();
+            ViewBag.Turmas = db.Turmas.ToList();
+
+            Inscricoes inscricoes = new Inscricoes { AlunosFK = Alunos.ID };
+
+            return View(new CadeirasTurmasToDropDown
+            {
+                Inscricoes = inscricoes,
+                Turmas = db.Turmas.ToList(),
+                Cadeiras = db.Cadeiras.ToList()
+        });
         }
 
 
