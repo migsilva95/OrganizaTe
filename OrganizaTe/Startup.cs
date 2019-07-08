@@ -54,6 +54,20 @@ namespace OrganizaTe
                 {
                     var result1 = userManager.AddToRole(user.Id, "Aluno");
                 }
+
+                // criar um utilizador 'Aluno'
+                user = new ApplicationUser();
+                user.UserName = "aluno@ipt.pt";
+                user.Email = "aluno@ipt.pt";
+
+                userPWD = "123_Asd";
+                chkUser = userManager.Create(user, userPWD);
+
+                //Adicionar o Utilizador à respetiva Role-Aluno-
+                if (chkUser.Succeeded)
+                {
+                    var result1 = userManager.AddToRole(user.Id, "Aluno");
+                }
             }
             catch (System.Exception)
             { }
@@ -88,6 +102,19 @@ namespace OrganizaTe
                 user = new ApplicationUser();
                 user.UserName = "pedrovinha@ipt.pt";
                 user.Email = "pedrovinha@ipt.pt";
+
+                userPWD = "123_Asd";
+                chkUser = userManager.Create(user, userPWD);
+
+                //Adicionar o Utilizador à respetiva Role-AdminSite-
+                if (chkUser.Succeeded)
+                {
+                    var result1 = userManager.AddToRole(user.Id, "AdminSite");
+                }
+
+                user = new ApplicationUser();
+                user.UserName = "adminsite@ipt.pt";
+                user.Email = "adminsite@ipt.pt";
 
                 userPWD = "123_Asd";
                 chkUser = userManager.Create(user, userPWD);
