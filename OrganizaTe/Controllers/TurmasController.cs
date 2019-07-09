@@ -74,10 +74,10 @@ namespace OrganizaTe.Controllers
             {
                 if (db.Turmas.ToList().Any(e => e.ID != TurmaIdCurso.Turmas.ID))
                 {
+                    Cursos curso = db.Cursos.Where(p => p.ID == TurmaIdCurso.CursoId).FirstOrDefault();
                     // validar se o horario foi fornecido
                     if (uploadHorario != null)
                     {
-                        Cursos curso = db.Cursos.Where(p => p.ID == TurmaIdCurso.CursoId).FirstOrDefault();
                         string pathImagens = "";
                         string pasta = "";
                         string nomeImagem = curso.Nome + "_" + TurmaIdCurso.Turmas.Ano + TurmaIdCurso.Turmas.Turma + TurmaIdCurso.Turmas.Semestre + Path.GetExtension(uploadHorario.FileName);
@@ -92,7 +92,6 @@ namespace OrganizaTe.Controllers
 
                         // guardar o nome do ficheiro na BD
                         TurmaIdCurso.Turmas.Horario = nomeImagem;
-                        TurmaIdCurso.Turmas.ConcatText = "Ano: " + TurmaIdCurso.Turmas.Ano + "Turma: " + TurmaIdCurso.Turmas.Turma + "Semestre: " + TurmaIdCurso.Turmas.Semestre;
                         uploadHorario.SaveAs(pathImagens);
                     }
                     int idNovaTurma = 0;
@@ -104,6 +103,7 @@ namespace OrganizaTe.Controllers
                     {
                         idNovaTurma = 1;
                     }
+                    TurmaIdCurso.Turmas.ConcatText = "Ano: " + TurmaIdCurso.Turmas.Ano + " Turma: " + TurmaIdCurso.Turmas.Turma + " Semestre: " + TurmaIdCurso.Turmas.Semestre;
                     TurmaIdCurso.Turmas.ID = idNovaTurma;
                     TurmaIdCurso.Turmas.CursosFK = TurmaIdCurso.CursoId;
                     db.Turmas.Add(TurmaIdCurso.Turmas);
