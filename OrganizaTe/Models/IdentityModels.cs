@@ -31,7 +31,7 @@ namespace OrganizaTe.Models
             return new ApplicationDbContext();
         }
 
-        // vamos colocar, aqui, as instruções relativas às tabelas do 'negócio'
+        // vamos colocar, aqui, as instruções relativas às tabelas 
         // descrever os nomes das tabelas na Base de Dados
         public virtual DbSet<Alunos> Alunos { get; set; } // tabela Alunos
         public virtual DbSet<Cadeiras> Cadeiras { get; set; } // tabela Cadeiras

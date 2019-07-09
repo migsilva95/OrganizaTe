@@ -13,10 +13,12 @@ namespace OrganizaTe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: CadeirasTemTurmas/1
+        //Esta função vai buscar as cadeiras da turma e lista-os
         public ActionResult Index(int id)
         {
             if (db.Turmas.Where(p => p.ID == id).FirstOrDefault() == null)
             {
+                //Retorna a lista de turmas
                 return RedirectToAction("Index", "Turmas");
             }
            
@@ -33,6 +35,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: CadeirasTemTurmas/Create
+        // Esta função faz return da View para adicionar uma cadeira a uma turma
         public ActionResult Create(int id)
         {
             if (db.Turmas.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -56,8 +59,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: CadeirasTemTurmas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Esta função verifica se a cadeira já existe na turma se não liga-a 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CadeirasToDropDown CadeirasToDropDown)
@@ -88,6 +90,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: CadeirasTemTurmas/Delete/5
+        // Esta função verifica se a cadeira já existe na turma, se sim mostra a view para eliminar a mesma
         public ActionResult Delete(int idCadeira, int idTurma)
         {
             if (db.CadeirasTemTurmas.Where(p => p.CadeirasFK == idCadeira && p.TurmasFK == idTurma).FirstOrDefault() == null)
@@ -104,6 +107,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: CadeirasTemTurmas/Delete/5
+        // Função para apagar o a ligação entre uma cadeira e uma turma
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int idCadeira, int idTurma)
@@ -115,6 +119,7 @@ namespace OrganizaTe.Controllers
             return RedirectToAction("Index", new { id = TurmasFK });
         }
 
+        //Fecha os ficheiros e ligações à base de dados 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

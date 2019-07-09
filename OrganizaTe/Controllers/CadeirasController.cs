@@ -13,6 +13,7 @@ namespace OrganizaTe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Cadeiras/1
+        //Esta função vai buscar as cadeiras e lista-as
         public ActionResult Index(int id)
         {
             if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -31,6 +32,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Cadeiras/Create
+        // Esta função faz return da View create cadeiras
         public ActionResult Create(int id)
         {
             if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -46,8 +48,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Cadeiras/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Esta função verifica se o nome da cadeira já foi usado, se não cria uma nova
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CadeiraIdCurso CadeiraIdCurso)
@@ -77,6 +78,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Cadeiras/Edit/5
+        // Esta função verifica se a cadeira existe e mostra a view da edição dela
         public ActionResult Edit(int id)
         {
             if (db.Cadeiras.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -93,6 +95,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Cadeiras/Edit/5
+        // Esta função dá save no Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Nome,CursosFK")] Cadeiras Cadeiras)
@@ -107,6 +110,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Cadeiras/Delete/5
+        // Esta função verifica se a cadeira existe e mostra a view para a eliminar
         public ActionResult Delete(int id)
         {
             if (db.Cadeiras.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -123,6 +127,7 @@ namespace OrganizaTe.Controllers
         }
 
         //POST: Cadeiras/Delete/5
+        // Função para apagar a cadeira e tudo o que tiver a sua Foreign Key
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -147,6 +152,7 @@ namespace OrganizaTe.Controllers
             return RedirectToAction("Index", new { id = cursoid });
         }
 
+        //Fecha os ficheiros e ligações à base de dados 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

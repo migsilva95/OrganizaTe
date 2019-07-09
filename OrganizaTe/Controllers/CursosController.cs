@@ -13,6 +13,7 @@ namespace OrganizaTe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Cursos
+        //Esta função vai buscar os cursos e lista-os
         public ActionResult Index()
         {
             // obtém os cursos
@@ -23,14 +24,14 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Cursos/Create
+        // Esta função faz return da View create cursos
         public ActionResult Create()
         {
             return View(new Cursos());
         }
 
         // POST: Cursos/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Esta função verifica se o nome do curso já foi usado, se não cria um novo curso
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Cursos Cursos)
@@ -59,6 +60,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Cursos/Edit/5
+        // Esta função verifica se o curso existe e mostra a view da edição desse curso
         public ActionResult Edit(int id)
         {
             if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -75,6 +77,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Cursos/Edit/5
+        // Esta função dá save no Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Nome")] Cursos Cursos)
@@ -89,6 +92,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Cursos/Delete/5
+        // Esta função verifica se o curso existe e mostra a view para eliminar o curso
         public ActionResult Delete(int id)
         {
             if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -103,7 +107,8 @@ namespace OrganizaTe.Controllers
             }
             return View(Cursos);
         }
-        //POST: Cursos/Delete/5
+        // POST: Cursos/Delete/5
+        // Função para apagar o cursos e tudo o que tiver a sua Foreign Key
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -144,6 +149,8 @@ namespace OrganizaTe.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //Fecha os ficheiros e ligações à base de dados 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

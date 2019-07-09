@@ -15,9 +15,10 @@ namespace OrganizaTe.Models
             ListaDeInscricoes = new HashSet<Inscricoes>();
         }
 
+        // Chave Primária
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; } // Chave Primária
+        public int ID { get; set; } 
 
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public string Ano { get; set; }

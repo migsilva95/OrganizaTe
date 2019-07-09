@@ -13,16 +13,18 @@ namespace OrganizaTe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Alunos
+        // Não está a ser utilizada de momento, fica preparado para updates futuros 
         public ActionResult Index()
         {
-            // obtém os cursos
+            // obtém os alunos
             var Alunos = db.Alunos
                            .ToList();
 
             return View(Alunos.ToList());
         }
-        
+
         // GET: Alunos/Edit/5
+        // Esta função verifica se o aluno existe e mostra a view da edição dela
         public ActionResult Edit(int id)
         {
             if (db.Alunos.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -39,6 +41,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Cursos/Edit/5
+        // Esta função dá save no Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Nome,Email,DataNasc")] Alunos Alunos)
@@ -53,6 +56,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Alunos/Delete/5
+        // Não está a ser utilizada de momento, fica preparado para updates futuros 
         public ActionResult Delete(int id)
         {
             if (db.Alunos.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -69,6 +73,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Alunos/Delete/5
+        // Não está a ser utilizada de momento, fica preparado para updates futuros 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -79,6 +84,7 @@ namespace OrganizaTe.Controllers
             return RedirectToAction("Index");
         }
 
+        //Fecha os ficheiros e ligações à base de dados 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

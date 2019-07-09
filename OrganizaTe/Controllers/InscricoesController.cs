@@ -12,6 +12,7 @@ namespace OrganizaTe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Inscricoes
+        // Função para listar as cadeiras inscritas
         public ActionResult IndexCadeiras()
         {
             if (db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault() == null)
@@ -30,6 +31,7 @@ namespace OrganizaTe.Controllers
         }
         
         // GET: Inscricoes
+        // Função para mostrar os horários das turmas em que estão inscritas
         public ActionResult IndexHorarios()
         {
             if (db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault() == null)
@@ -50,6 +52,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Inscricoes/CreateInital
+        // Função para criar a View para escolher o curso que tem a cadeira que queremos nos inscrever 
         public ActionResult CreateInital()
         {
             if (db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault() == null)
@@ -63,8 +66,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Inscricoes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //Da redirect para a View do Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateInital(ListCursos ListCursos)
@@ -74,6 +76,7 @@ namespace OrganizaTe.Controllers
 
 
         // GET: Inscricoes/Create/1
+        //Gera a View do create
         public ActionResult Create(int id)
         {
             if (db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault() == null)
@@ -99,8 +102,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Inscricoes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //Esta função guarda as inscrições na base de dados na tabela Inscricoes
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CadeirasTurmasToDropDown CadeirasTurmasToDropDown)
@@ -134,6 +136,7 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: Inscricoes/Delete/5
+        //Cria a View para apagar a inscrição
         public ActionResult Delete(int id)
         {
             if (db.Inscricoes.Where(p => p.ID == id).FirstOrDefault() == null)
@@ -150,6 +153,7 @@ namespace OrganizaTe.Controllers
         }
 
         // POST: Inscricoes/Delete/5
+        //Função para apagar a inscrição
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -160,7 +164,7 @@ namespace OrganizaTe.Controllers
             return RedirectToAction("IndexCadeiras");
         }
 
-
+        //Fecha os ficheiros e ligações à base de dados 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

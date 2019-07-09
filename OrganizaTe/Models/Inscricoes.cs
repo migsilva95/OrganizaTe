@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace OrganizaTe.Models
 {
     public class Inscricoes
-    {
+    {   
+        // Chave Primária
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; } // Chave Primária
+        public int ID { get; set; } 
         
         // FK para a tabela dos Alunos
         [ForeignKey("Aluno")]

@@ -17,63 +17,73 @@ namespace OrganizaTe.Controllers
         // GET: Turmas/1
         public ActionResult Index(int id)
         {
+            //Verifica se o curso existe
             if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
+            //Manda o curso que está no ID
             var curso = db.Cursos.Where(p => p.ID == id).FirstOrDefault();
 
-            // obtém as turmas de uma cadeira
+            //Obtém as turmas de um curso
             var turmas = db.Turmas
                            .Include(p => p.Curso)
                            .Where(p => p.CursosFK == id);
 
+            //Retorna a View das turmas
             return View(new CursoEListaTurmas { Turmas = turmas.ToList(), Cursos = curso });
         }
 
         // GET: Turmas/Details/5
         public ActionResult Details(int id)
         {
+            //Verifica se a turma existe
             if (db.Turmas.Where(p => p.ID == id).FirstOrDefault() == null)
             {
+                //Retorna a lista de turmas
                 return RedirectToAction("Index", "Turmas");
             }
-
+            //Vai a procura da turma
             Turmas turmas = db.Turmas.Find(id);
             if (turmas == null)
             {
                 return HttpNotFound();
             }
+            //Retorna a View da turma clicada
             return View(turmas);
         }
 
         // GET: Turmas/Create
         public ActionResult Create(int id)
         {
+            //Verifica se o curso existe
             if (db.Cursos.Where(p => p.ID == id).FirstOrDefault() == null)
             {
+                //Retorna a lista de turmas
                 return RedirectToAction("Index", "Home");
             }
 
+            //Retorna a View do create da turma 
             return View(new TurmaIdCurso
             {
+                //Mete na nova turma o no curso certo e cria a nova turma
                 CursoId = id,
                 Turmas = new Turmas()
             });
         }
 
         // POST: Turmas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TurmaIdCurso TurmaIdCurso, HttpPostedFileBase uploadHorario)
         {
             if (ModelState.IsValid)
             {
+                //Verifica se a turma já existe 
                 if (db.Turmas.ToList().Any(e => e.ID != TurmaIdCurso.Turmas.ID))
                 {
+                    //Vai buscar o curso
                     Cursos curso = db.Cursos.Where(p => p.ID == TurmaIdCurso.CursoId).FirstOrDefault();
                     // validar se o horario foi fornecido
                     if (uploadHorario != null)
@@ -94,9 +104,11 @@ namespace OrganizaTe.Controllers
                         TurmaIdCurso.Turmas.Horario = nomeImagem;
                         uploadHorario.SaveAs(pathImagens);
                     }
+
                     int idNovaTurma = 0;
                     try
                     {
+                        //Gera o novo ID
                         idNovaTurma = db.Turmas.Max(a => a.ID) + 1;
                     }
                     catch (Exception)
@@ -106,23 +118,28 @@ namespace OrganizaTe.Controllers
                     TurmaIdCurso.Turmas.ConcatText = "Ano: " + TurmaIdCurso.Turmas.Ano + " Turma: " + TurmaIdCurso.Turmas.Turma + " Semestre: " + TurmaIdCurso.Turmas.Semestre;
                     TurmaIdCurso.Turmas.ID = idNovaTurma;
                     TurmaIdCurso.Turmas.CursosFK = TurmaIdCurso.CursoId;
+                    //Adiciona nova turma
                     db.Turmas.Add(TurmaIdCurso.Turmas);
                     db.SaveChanges();
                     return RedirectToAction("Index", "Turmas", new { id = TurmaIdCurso.CursoId });
                 }
             }
 
+            //Da return das turmas
             return View(TurmaIdCurso.Turmas);
         }
 
         // GET: Turmas/Edit/5
         public ActionResult Edit(int id)
         {
+            //Verifica se a turma existe
             if (db.Turmas.Where(p => p.ID == id).FirstOrDefault() == null)
             {
+                //Retorna a lista de turmas
                 return RedirectToAction("Index", "Turmas");
             }
 
+            //Verifica se a turma existe
             Turmas Turmas = db.Turmas.Find(id);
             if (Turmas == null)
             {
@@ -169,11 +186,14 @@ namespace OrganizaTe.Controllers
         // GET: Turmas/Delete/5
         public ActionResult Delete(int id)
         {
+            //Verifica se a turma existe
             if (db.Turmas.Where(p => p.ID == id).FirstOrDefault() == null)
             {
+                //Retorna a lista de Turmas
                 return RedirectToAction("Index", "Home");
             }
 
+            //Verifica se existe 
             Turmas Turmas = db.Turmas.Find(id);
             if (Turmas == null)
             {
@@ -187,18 +207,23 @@ namespace OrganizaTe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            //Vai à procura da Turma
             Turmas Turmas = db.Turmas.Find(id);
             int cursoid = Turmas.CursosFK;
             var filePath = Server.MapPath("~/Images/" + Turmas.Horario);
+            //Verifica se existe o ficheiro 
             if (System.IO.File.Exists(filePath))
             {
+                //Apaga o ficheiro do horario da pasta
                 System.IO.File.Delete(filePath);
             }
+            //Apaga a Turma da tabela
             db.Turmas.Remove(Turmas);
             db.SaveChanges();
             return RedirectToAction("Index", new { id = cursoid });
         }
 
+        //Fecha os ficheiros e ligações à base de dados 
         protected override void Dispose(bool disposing)
         {
             if (disposing)

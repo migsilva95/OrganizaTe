@@ -16,10 +16,12 @@ namespace OrganizaTe.Models
             ListaDeCadeirasTemTurmas = new HashSet<CadeirasTemTurmas>();
         }
 
+        //Chave Primária
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; } // Chave Primária
+        public int ID { get; set; }
 
+        //Nome
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public string Nome { get; set; }
         
