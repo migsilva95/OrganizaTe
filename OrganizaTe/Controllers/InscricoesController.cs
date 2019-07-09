@@ -41,10 +41,12 @@ namespace OrganizaTe.Controllers
 
             // obtém os cursos
             var Inscricoes = db.Inscricoes
-                           .Where(i => i.AlunosFK == alunos.ID)
-                           .ToList();
+                            .Where(i => i.AlunosFK == alunos.ID)
+                            .ToList()
+                            .GroupBy(i => i.TurmasFK)
+                            .Select(i => i.First());
 
-            return View(Inscricoes.ToList());
+            return View(Inscricoes);
         }
 
         // GET: Inscricoes/CreateInital
@@ -101,11 +103,11 @@ namespace OrganizaTe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Inscricoes Inscricoes)
+        public ActionResult Create(CadeirasTurmasToDropDown CadeirasTurmasToDropDown)
         {
             if (ModelState.IsValid)
             {
-                if (db.Inscricoes.ToList().Any(e => e.AlunosFK != Inscricoes.AlunosFK || e.TurmasFK != Inscricoes.TurmasFK || e.CadeirasFK != Inscricoes.CadeirasFK))
+                if (db.Inscricoes.ToList().Any(e => e.AlunosFK != CadeirasTurmasToDropDown.Inscricoes.AlunosFK || e.TurmasFK != CadeirasTurmasToDropDown.Inscricoes.TurmasFK || e.CadeirasFK != CadeirasTurmasToDropDown.Inscricoes.CadeirasFK))
                 {
                     int idNovaInscricao = 0;
                     try
@@ -116,16 +118,16 @@ namespace OrganizaTe.Controllers
                     {
                         idNovaInscricao = 1;
                     }
-                    Inscricoes.ID = idNovaInscricao;
-                    db.Inscricoes.Add(Inscricoes);
+                    CadeirasTurmasToDropDown.Inscricoes.ID = idNovaInscricao;
+                    db.Inscricoes.Add(CadeirasTurmasToDropDown.Inscricoes);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Inscricoes");
+                    return RedirectToAction("IndexCadeiras", "Inscricoes");
                 }
             }
 
             return View(new CadeirasTurmasToDropDown
             {
-                Inscricoes = Inscricoes,
+                Inscricoes = CadeirasTurmasToDropDown.Inscricoes,
                 Turmas = db.Turmas.ToList(),
                 Cadeiras = db.Cadeiras.ToList()
             });
