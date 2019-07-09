@@ -53,4 +53,10 @@ namespace OrganizaTe.Models
         public List<Cadeiras> Cadeiras { get; set; }
         public List<Turmas> Turmas { get; set; }
     }
+
+    public class ListCursos
+    {
+        public int idCurso { get; set; }
+        public List<Cursos> Cursos { get; set; }
+    }
 }

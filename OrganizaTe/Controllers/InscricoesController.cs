@@ -47,10 +47,39 @@ namespace OrganizaTe.Controllers
             return View(Inscricoes.ToList());
         }
 
-        // GET: Inscricoes/Create
-        public ActionResult Create()
+        // GET: Inscricoes/CreateInital
+        public ActionResult CreateInital()
         {
             if (db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            List<Cursos> Cursos = db.Cursos.ToList();
+            
+            return View(new ListCursos { Cursos = Cursos });
+        }
+
+        // POST: Inscricoes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateInital(ListCursos ListCursos)
+        {
+            return RedirectToAction("Create", "Inscricoes", new { id = ListCursos.idCurso });
+        }
+
+
+        // GET: Inscricoes/Create/1
+        public ActionResult Create(int id)
+        {
+            if (db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (db.Cursos.Where(c => c.ID == id).FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -62,8 +91,8 @@ namespace OrganizaTe.Controllers
             return View(new CadeirasTurmasToDropDown
             {
                 Inscricoes = inscricoes,
-                Turmas = db.Turmas.ToList(),
-                Cadeiras = db.Cadeiras.ToList()
+                Turmas = db.Turmas.Where(t => t.CursosFK == id).ToList(),
+                Cadeiras = db.Cadeiras.Where(c => c.CursosFK == id).ToList()
             });
         }
 

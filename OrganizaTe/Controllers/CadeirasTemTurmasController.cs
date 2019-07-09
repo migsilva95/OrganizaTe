@@ -21,8 +21,7 @@ namespace OrganizaTe.Controllers
             }
            
             var cadeiras = db.CadeirasTemTurmas.Where(ctt => ctt.TurmasFK == id).Select(ctt => ctt.Cadeira);
-
-
+            
             Turmas turmas = db.Turmas.Find(id);
             if (turmas == null)
             {
@@ -65,7 +64,7 @@ namespace OrganizaTe.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.CadeirasTemTurmas.ToList().Any(e => e.CadeirasFK != CadeirasToDropDown.CadeirasTemTurmas.CadeirasFK || e.TurmasFK != CadeirasToDropDown.CadeirasTemTurmas.TurmasFK))
+                if (db.CadeirasTemTurmas.Where(p => p.CadeirasFK == CadeirasToDropDown.CadeirasTemTurmas.CadeirasFK && p.TurmasFK == CadeirasToDropDown.CadeirasTemTurmas.TurmasFK).FirstOrDefault() == null)
                 {
                     int idNovo = 0;
                     try
@@ -107,9 +106,9 @@ namespace OrganizaTe.Controllers
         // POST: CadeirasTemTurmas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int idCadeira, int idTurma)
         {
-            CadeirasTemTurmas CadeirasTemTurmas = db.CadeirasTemTurmas.Where(p => p.CadeirasFK == id).FirstOrDefault();
+            CadeirasTemTurmas CadeirasTemTurmas = db.CadeirasTemTurmas.Where(p => p.CadeirasFK == idCadeira && p.TurmasFK == idTurma).FirstOrDefault();
             int TurmasFK = CadeirasTemTurmas.TurmasFK;
             db.CadeirasTemTurmas.Remove(CadeirasTemTurmas);
             db.SaveChanges();

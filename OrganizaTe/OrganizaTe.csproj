@@ -292,6 +292,7 @@
     <Content Include="Views\Inscricoes\IndexCadeiras.cshtml" />
     <Content Include="Views\Inscricoes\Delete.cshtml" />
     <Content Include="Views\Inscricoes\IndexHorarios.cshtml" />
+    <Content Include="Views\Inscricoes\CreateInital.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
