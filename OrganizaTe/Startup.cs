@@ -57,8 +57,8 @@ namespace OrganizaTe
 
                 // criar um utilizador 'Aluno'
                 user = new ApplicationUser();
-                user.UserName = "aluno@ipt.pt";
-                user.Email = "aluno@ipt.pt";
+                user.UserName = "josealves@ipt.pt";
+                user.Email = "josealves@ipt.pt";
 
                 userPWD = "123_Asd";
                 chkUser = userManager.Create(user, userPWD);

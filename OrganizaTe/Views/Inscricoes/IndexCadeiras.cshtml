@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OrganizaTe.Models.Inscricoes>
+
+@{
+    ViewBag.Title = "Cadeiras Inscritas";
+}
+
+<h2>Cadeiras Inscritas</h2>
+
+<p>
+    @Html.ActionLink("Adicionar nova cadeira", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cadeira.Nome)
+        </th>
+        <th>
+            Horário
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cadeira.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Turma.Curso.Nome) @Html.DisplayFor(modelItem => item.Turma.Ano) @Html.DisplayFor(modelItem => item.Turma.Turma)
+        </td>
+        <td>
+            @Html.ActionLink("❌", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

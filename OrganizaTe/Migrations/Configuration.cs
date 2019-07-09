@@ -20,12 +20,12 @@ namespace OrganizaTe.Migrations
             //*********************************************************************
             // adiciona ALUNOS
             var alunos = new List<Alunos> {
-                new Alunos {Nome="Jose Alves",DataNasc=DateTime.Parse("02-07-1998")},
-                new Alunos {Nome="Tania Vieira",DataNasc=DateTime.Parse("02-07-2000")},
-                new Alunos {Nome="Antonio Rocha",DataNasc=DateTime.Parse("02-07-1999")},
-                new Alunos {Nome="Andre Silveira",DataNasc=DateTime.Parse("02-07-1999")},
-                new Alunos {Nome="Lurdes Vieira",DataNasc=DateTime.Parse("02-07-1999")},
-                new Alunos {Nome="Claudia Pinto",DataNasc=DateTime.Parse("02-07-1998")}
+                new Alunos {Nome="Jose Alves",Email="josealves@ipt.pt",DataNasc=DateTime.Parse("02-07-1998")},
+                new Alunos {Nome="Tania Vieira",Email="taniavieira@ipt.pt",DataNasc=DateTime.Parse("02-07-2000")},
+                new Alunos {Nome="Antonio Rocha",Email="antoniorocha@ipt.pt",DataNasc=DateTime.Parse("02-07-1999")},
+                new Alunos {Nome="Andre Silveira",Email="andresilveira@ipt.pt",DataNasc=DateTime.Parse("02-07-1999")},
+                new Alunos {Nome="Lurdes Vieira",Email="lurdesvieira@ipt.pt",DataNasc=DateTime.Parse("02-07-1999")},
+                new Alunos {Nome="Claudia Pinto",Email="claudiapinto@ipt.pt",DataNasc=DateTime.Parse("02-07-1998")}
             };
             alunos.ForEach(aa => context.Alunos.AddOrUpdate(a => a.Nome, aa));
             context.SaveChanges();
