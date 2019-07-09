@@ -43,25 +43,11 @@ namespace OrganizaTe
             {
                 // criar um utilizador 'Aluno'
                 var user = new ApplicationUser();
-                user.UserName = "aluno18904@ipt.pt";
-                user.Email = "aluno18904@ipt.pt";
-
-                string userPWD = "123_Asd";
-                var chkUser = userManager.Create(user, userPWD);
-
-                //Adicionar o Utilizador à respetiva Role-Aluno-
-                if (chkUser.Succeeded)
-                {
-                    var result1 = userManager.AddToRole(user.Id, "Aluno");
-                }
-
-                // criar um utilizador 'Aluno'
-                user = new ApplicationUser();
                 user.UserName = "josealves@ipt.pt";
                 user.Email = "josealves@ipt.pt";
 
-                userPWD = "123_Asd";
-                chkUser = userManager.Create(user, userPWD);
+                string userPWD = "123_Asd";
+                var chkUser = userManager.Create(user, userPWD);
 
                 //Adicionar o Utilizador à respetiva Role-Aluno-
                 if (chkUser.Succeeded)
