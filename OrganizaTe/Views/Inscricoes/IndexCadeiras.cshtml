@@ -15,23 +15,31 @@
             @Html.DisplayNameFor(model => model.Cadeira.Nome)
         </th>
         <th>
-            Horário
+            Turma Inscrita
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cadeira.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Turma.Curso.Nome) @Html.DisplayFor(modelItem => item.Turma.Ano) @Html.DisplayFor(modelItem => item.Turma.Turma)
-        </td>
-        <td>
-            @Html.ActionLink("❌", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cadeira.Nome)
+            </td>
+            <td>
+                <p>@Html.DisplayFor(modelItem => item.Turma.Curso.Nome)</p>
+                <p>Ano: @Html.DisplayFor(modelItem => item.Turma.Ano)</p>
+                <p>Turma: @Html.DisplayFor(modelItem => item.Turma.Turma)</p>
+                <p>Semestre: @Html.DisplayFor(modelItem => item.Turma.Semestre)</p>
+            </td>
+            <td>
+                @Html.ActionLink("❌", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div>
+    @Html.ActionLink("Voltar atrás", "IndexHorarios")
+</div>

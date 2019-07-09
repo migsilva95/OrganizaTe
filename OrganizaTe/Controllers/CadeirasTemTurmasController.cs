@@ -36,14 +36,16 @@ namespace OrganizaTe.Controllers
         // GET: CadeirasTemTurmas/Create
         public ActionResult Create(int id)
         {
-            if (db.CadeirasTemTurmas.Where(p => p.TurmasFK == id).FirstOrDefault() == null)
+            if (db.Turmas.Where(p => p.ID == id).FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            Cursos Curso = db.Cursos.Where(c => c.ID == id).FirstOrDefault();
+            Turmas Turmas = db.Turmas.Where(t => t.ID == id).FirstOrDefault();
 
-            List<Cadeiras> Cadeiras = db.Cadeiras.Where(p=> p.CursosFK == Curso.ID).ToList();
+            Cursos Cursos = db.Cursos.Where(c => c.ID == Turmas.CursosFK).FirstOrDefault();
+
+            List<Cadeiras> Cadeiras = db.Cadeiras.Where(c=> c.CursosFK == Cursos.ID).ToList();
 
             CadeirasTemTurmas CadeirasTemTurmas = new CadeirasTemTurmas{ TurmasFK = id };
 
@@ -87,14 +89,14 @@ namespace OrganizaTe.Controllers
         }
 
         // GET: CadeirasTemTurmas/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int idCadeira, int idTurma)
         {
-            if (db.CadeirasTemTurmas.Where(p => p.CadeirasFK == id).FirstOrDefault() == null)
+            if (db.CadeirasTemTurmas.Where(p => p.CadeirasFK == idCadeira && p.TurmasFK == idTurma).FirstOrDefault() == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            CadeirasTemTurmas CadeirasTemTurmas = db.CadeirasTemTurmas.Where(p => p.CadeirasFK == id).FirstOrDefault();
+            CadeirasTemTurmas CadeirasTemTurmas = db.CadeirasTemTurmas.Where(p => p.CadeirasFK == idCadeira && p.TurmasFK == idTurma).FirstOrDefault();
             if (CadeirasTemTurmas == null)
             {
                 return HttpNotFound();

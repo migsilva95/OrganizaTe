@@ -1,0 +1,27 @@
+﻿@model IEnumerable<OrganizaTe.Models.Inscricoes>
+
+@{
+    ViewBag.Title = "Horários";
+}
+
+<h2>Horários</h2>
+
+<p>
+    @Html.ActionLink("Cadeiras Inscritas", "IndexCadeiras")
+</p>
+
+@foreach (var item in Model)
+{
+    <br />
+    <p>@Html.DisplayFor(modelItem => item.Turma.Curso.Nome)</p>
+    <p>Ano: @Html.DisplayFor(modelItem => item.Turma.Ano)</p>
+    <p>Turma: @Html.DisplayFor(modelItem => item.Turma.Turma)</p>
+    <p>Semestre: @Html.DisplayFor(modelItem => item.Turma.Semestre)</p>
+    <p>
+        <a href="~/Images/@(item.Turma.Horario)" target="_blank">
+            <img src="~/Images/@(item.Turma.Horario)" />
+        </a>
+    </p>
+
+}
+

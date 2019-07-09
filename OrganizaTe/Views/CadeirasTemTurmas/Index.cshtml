@@ -74,11 +74,11 @@
                 @if (User.IsInRole("AdminSite"))
                 {
                     <p>
-                        @Html.ActionLink("❌", "Delete", new { id = item.ID })
+                        @Html.ActionLink("❌", "Delete", new { idCadeira = item.ID, idTurma = Model.Turma.ID })
                     </p>
                 }
             </td>
         </tr>
     }
 </table>
-@Html.ActionLink("Voltar Atrás", "Index","Turmas", new { id = Model.Turma.ID },null)
+@Html.ActionLink("Voltar Atrás", "Index","Turmas", new { id = Model.Turma.CursosFK },null)

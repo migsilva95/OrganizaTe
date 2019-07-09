@@ -290,6 +290,8 @@
     <Content Include="Views\CadeirasTemTurmas\Delete.cshtml" />
     <Content Include="Views\Inscricoes\Create.cshtml" />
     <Content Include="Views\Inscricoes\IndexCadeiras.cshtml" />
+    <Content Include="Views\Inscricoes\Delete.cshtml" />
+    <Content Include="Views\Inscricoes\IndexHorarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

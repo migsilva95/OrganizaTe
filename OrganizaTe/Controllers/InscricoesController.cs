@@ -28,6 +28,25 @@ namespace OrganizaTe.Controllers
 
             return View(Inscricoes.ToList());
         }
+        
+        // GET: Inscricoes
+        public ActionResult IndexHorarios()
+        {
+            if (db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            Alunos alunos = db.Alunos.Where(a => a.Email == User.Identity.Name).FirstOrDefault();
+
+            // obtém os cursos
+            var Inscricoes = db.Inscricoes
+                           .Where(i => i.AlunosFK == alunos.ID)
+                           .ToList();
+
+            return View(Inscricoes.ToList());
+        }
+
         // GET: Inscricoes/Create
         public ActionResult Create()
         {
@@ -82,6 +101,34 @@ namespace OrganizaTe.Controllers
                 Cadeiras = db.Cadeiras.ToList()
             });
         }
+
+        // GET: Inscricoes/Delete/5
+        public ActionResult Delete(int id)
+        {
+            if (db.Inscricoes.Where(p => p.ID == id).FirstOrDefault() == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            Inscricoes Inscricoes = db.Inscricoes.Where(p => p.ID == id).FirstOrDefault();
+            if (Inscricoes == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Inscricoes);
+        }
+
+        // POST: Inscricoes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Inscricoes Inscricoes = db.Inscricoes.Where(p => p.ID == id).FirstOrDefault();
+            db.Inscricoes.Remove(Inscricoes);
+            db.SaveChanges();
+            return RedirectToAction("IndexCadeiras");
+        }
+
 
         protected override void Dispose(bool disposing)
         {
