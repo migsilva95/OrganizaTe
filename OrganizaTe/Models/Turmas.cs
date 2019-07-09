@@ -30,6 +30,8 @@ namespace OrganizaTe.Models
         [Required(ErrorMessage = "O {0} é de preenchimento obrigatório!")]
         public string Semestre { get; set; }
 
+        public string ConcatText { get; set; }
+
         // FK para a tabela dos Cursos
         [ForeignKey("Curso")]
         public int CursosFK { get; set; }

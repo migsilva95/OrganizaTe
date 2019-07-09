@@ -92,6 +92,7 @@ namespace OrganizaTe.Controllers
 
                         // guardar o nome do ficheiro na BD
                         TurmaIdCurso.Turmas.Horario = nomeImagem;
+                        TurmaIdCurso.Turmas.ConcatText = "Ano: " + TurmaIdCurso.Turmas.Ano + "Turma: " + TurmaIdCurso.Turmas.Turma + "Semestre: " + TurmaIdCurso.Turmas.Semestre;
                         uploadHorario.SaveAs(pathImagens);
                     }
                     int idNovaTurma = 0;
@@ -154,6 +155,7 @@ namespace OrganizaTe.Controllers
                     Directory.CreateDirectory(pasta);
 
                     // guardar o nome do ficheiro na BD
+                    Turmas.ConcatText = "Ano: " + Turmas.Ano + "Turma: " + Turmas.Turma + "Semestre: " + Turmas.Semestre;
                     Turmas.Horario = nomeImagem;
                     uploadHorario.SaveAs(pathImagens);
                 }

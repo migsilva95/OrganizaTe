@@ -27,7 +27,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Inscricoes.TurmasFK, "Turmas", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("Inscricoes.TurmasFK", new SelectList(Model.Turmas, "ID", "Turma"), htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("Inscricoes.TurmasFK", new SelectList(Model.Turmas, "ID", "ConcatText"), htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Inscricoes.TurmasFK, "", new { @class = "text-danger" })
         </div>
     </div>
